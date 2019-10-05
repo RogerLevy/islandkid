@@ -5,6 +5,7 @@ include prg/gamester/lib/collisions.f
 
 globals
     cell global camera
+    cell global subject
 drop
 
 16 bank tilemap0  \ 16
@@ -15,7 +16,10 @@ drop
 
 \ : coldata@  cells >pic @> >coldata + @ block ;
 \ : coldata  1 coldata@ ;
-create coldata 0 c, 0 c, #-1 c, #-1 c, 0 c, 0 c,
+
+create coldata
+0 c, 0 c, #-1 c, #-1 c, #-1 c, #-1 c, 0 c, #-1 c,
+0 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, 
 
 : map  stage layer2 >tilemap @> ;
 : standard-physics  map coldata collide-tilemap ;
