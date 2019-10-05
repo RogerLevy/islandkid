@@ -18,4 +18,4 @@ dialog: mydialog
     textline: of the emergency barkcast system.
     textline: (kill me)
     
-mydialog
+\ mydialog
