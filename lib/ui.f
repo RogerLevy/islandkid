@@ -43,7 +43,7 @@ common also uiing
     paused on
 ;
 
-: textline:  ( -- <text) >
+: textline:  ( -- <text> )
     here  32 for bl c, loop  0 parse rot swap move ;
 
 : dialog:  ( -- <name> ) ( -- )
