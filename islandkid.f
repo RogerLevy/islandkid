@@ -1,13 +1,21 @@
 include ramen/ramen.f
 empty
 s" islandkid.blk" include prg/gamester/gamester.f
+
+include prg/islandkid/lib/ui.f
+
 displaywh 3 3 2/ resolution
 
-get-order get-current
+3 :overlay
+    draw-ui-text
+;
 
-\ common
-\ : init-world ( tileset n -- )
-\     | n ts | 
-\     n tilemap ts n world init-slew ;
+\ get-order get-current
+\ set-current set-order
+
+dialog: mydialog
+    textline: Hi this is a test
+    textline: of the emergency barkcast system.
+    textline: (kill me)
     
-set-current set-order
+mydialog
