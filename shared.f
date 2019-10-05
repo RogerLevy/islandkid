@@ -22,6 +22,7 @@ create coldata 0 c, 0 c, #-1 c, #-1 c, 0 c, 0 c,
 
 : init-world  ( n -- )
     dup world over tilemap | t w n |
+    w init-scene
     t w layer2 >tilemap >!
     w layer2 >tileset @ 0 = if
         pic( default ) w layer2 >tileset >!
