@@ -10,9 +10,12 @@ drop
 
 16 bank tilemap0  \ 16
 32 bank world0    \ 16
+48 bank ui-tilemap
+
 
 : tilemap  /bank * tilemap0 + ;
 : world    /bank * world0 + ;
+
 
 \ : coldata@  cells >pic @> >coldata + @ block ;
 \ : coldata  1 coldata@ ;
