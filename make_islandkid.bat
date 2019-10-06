@@ -1,2 +1,2 @@
 cd ../..
-./ramen/make_sfwin.bat adventure prg/adventure/make.f prg\adventure
+./ramen/make_sfwin.bat islandkid prg/islandkid/make.f prg\islandkid

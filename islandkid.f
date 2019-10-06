@@ -19,3 +19,7 @@ dialog: mydialog
     textline: (kill me)
     
 \ mydialog
+
+:make warm
+    0 world switchto
+;
