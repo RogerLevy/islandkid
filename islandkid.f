@@ -5,8 +5,8 @@ include prg/islandkid/lib/ui.f
 displaywh 3 3 2/ resolution
 
 : draw-status
-    225 17 at  78 hunger @ 100 / * 3 green rectf
-    225 24 at  78 health @ 100 / * 3 red rectf
+    225 17 at  78 hunger @ 100 / * 3 lgreen rectf
+    225 24 at  78 health @ 100 / * 3 orange rectf
 ;
 
 3 :overlay
