@@ -10,7 +10,15 @@ drop
     anim# !  1 32 / rate !
 ;
 
+: update-status
+    hunger @ 0.001 - 0 max hunger !
+    hunger @ 0 <= if
+        health @ 0.0005 - 0 max health !
+    then
+;
+
 state: boksil state1
+    update-status
     1 walkctr +!
     vx 2@ or if
         walkctr @ 8 < ?exit

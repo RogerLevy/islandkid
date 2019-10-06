@@ -6,6 +6,8 @@ include prg/gamester/lib/collisions.f
 globals
     cell global camera
     cell global subject
+    cell global hunger
+    cell global health
 drop
 
 16 bank tilemap0  \ 16

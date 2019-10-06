@@ -9,7 +9,7 @@ define-role camera cameraing
 
 state: camera state1
     subject @ if 
-        subject @> { x 2@ viewwh 2 2 2/ 2- }  x 2! 
+        subject @> { x 2@ viewwh 2 2 2/ 2- 8 8 2+ }  x 2! 
     then
     !scroll
 ;

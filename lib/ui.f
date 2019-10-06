@@ -5,6 +5,7 @@ common
 
 define uiing
 
+common also uiing
 variable ui
 \ variable >text  
 0 value &text
@@ -13,6 +14,8 @@ variable ui
 : show-ui  0 stage layer4 viewport x!      ui on ;
 hide-ui
 
+
+define uiing
 : lines  ( adr #lines - )
     for
         dup
