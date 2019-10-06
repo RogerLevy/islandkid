@@ -1,6 +1,9 @@
 include ramen/ramen.f
 empty
 s" islandkid.blk" include prg/gamester/gamester.f
+get-order get-current
+
+
 include prg/islandkid/lib/ui.f
 displaywh 3 3 2/ resolution
 
@@ -14,8 +17,6 @@ default-scene-options 3 :overlay
     draw-status
 ;
 
-\ get-order get-current
-\ set-current set-order
 
 dialog: mydialog
     textline: Hi this is a test
@@ -39,3 +40,7 @@ dialog: mydialog
 \ mydialog
 
 show-ui
+
+
+\ Don't move this!  Should go at the bottom.
+set-current set-order
