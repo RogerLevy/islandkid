@@ -11,9 +11,9 @@ drop
 ;
 
 : update-status
-    hunger @ 0.001 - 0 max hunger !
+    -0.001 +hunger
     hunger @ 0 <= if
-        health @ 0.0005 - 0 max health !
+        -0.0005 +health
     then
 ;
 
@@ -29,6 +29,7 @@ state: boksil state1
     <right> kstate if  1 vx !  0 walkctr !  2 ?animate ;then
     <left> kstate if  -1 vx !  0 walkctr !  3 ?animate ;then
 ;
+
 action: boksil physics  standard-physics ;
 action: boksil start  0 ?animate  state1 ;
 action: boksil hit  ." HIT!" ;

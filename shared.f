@@ -86,3 +86,11 @@ create coldata
     r> drop
 ;
 
+( --== Health/hunger stuff ==-- )
+
+: +health  health @ + 0 100 clamp health ! ;
+: +hunger  hunger @ + 0 100 clamp hunger ! ;
+
+: new-day  ( -- )
+    hunger @ 50 - 10 / +health
+;
