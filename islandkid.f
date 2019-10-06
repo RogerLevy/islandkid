@@ -9,7 +9,7 @@ displaywh 3 3 2/ resolution
     225 24 at  78 health @ 100 / * 3 orange rectf
 ;
 
-3 :overlay
+default-scene-options 3 :overlay
     draw-ui-text
     draw-status
 ;
