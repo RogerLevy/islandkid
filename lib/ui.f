@@ -5,14 +5,23 @@ common
 
 define uiing
 
+
 common also uiing
 variable ui
+0 value dialog?
 \ variable >text  
 0 value &text
 
-: hide-ui  -9999 stage layer4 viewport x!  ui off ;
-: show-ui  0 stage layer4 viewport x!      ui on ;
-hide-ui
+: ui-layer stage layer4 ;
+
+
+: hide-dialog  160 ui-layer viewport h!   false to dialog? ;
+
+: hide-ui  0   ui-layer viewport w!  ui off  hide-dialog ;
+: show-ui  320 ui-layer viewport w!  ui on ;
+show-ui
+
+: show-dialog  240 ui-layer viewport h!  show-ui  true to dialog? ;
 
 
 define uiing
@@ -28,7 +37,7 @@ define uiing
 common also uiing
 
 : draw-ui-text
-    ui @ -exit
+    ui @ -exit  dialog? -exit
     &text -exit
     default-font font>
     32 168 at   &text 3 lines
@@ -37,12 +46,12 @@ common also uiing
         288 208 at   s" Z" text
     then
     
-    <z> pressed if  paused off  hide-ui  then
+    <z> pressed if  paused off  hide-dialog  then
 ;
 
 : dialog  ( adr -- )  \ adr = 5 rows x 32 chars
     to &text
-    show-ui
+    show-dialog
     paused on
 ;
 
