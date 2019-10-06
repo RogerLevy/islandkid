@@ -25,11 +25,13 @@ dialog: mydialog
 : new-game  ( don't call this in WARM! )
     100 health !
     50 hunger !
+    \ load world 0
 ;
 
 :make warm
-    \ 0 world switchto  \ <--- this isn't necessary. 
-    hide-ui
+    \ playfield switchto
+    0 world switchto
+    hide-dialog
 ;
 
 ( --== Testing ==-- )

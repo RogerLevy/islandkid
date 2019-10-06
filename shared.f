@@ -29,6 +29,9 @@ create coldata
 : map  stage layer2 >tilemap @> ;
 : standard-physics  map coldata collide-tilemap ;
 
+
+( --== CLI extensions ==-- )
+
 : init-world  ( n -- )
     dup world over tilemap | t w n |
     w init-scene
@@ -85,6 +88,7 @@ create coldata
     r@ >in ! save-template
     r> drop
 ;
+
 
 ( --== Health/hunger stuff ==-- )
 
