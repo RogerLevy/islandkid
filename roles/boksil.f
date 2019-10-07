@@ -31,5 +31,5 @@ state: boksil state1
 ;
 
 action: boksil physics  standard-physics ;
-action: boksil start  0 ?animate  state1 ;
+action: boksil start  0 ?animate  state1  me subject >! ;
 action: boksil hit  ." HIT!" ;

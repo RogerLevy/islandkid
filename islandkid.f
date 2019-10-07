@@ -26,18 +26,18 @@ dialog: mydialog
 
 ( --== Modes ==-- )
 
-: mode>  step> ;
+: mode>  postpone step> ; immediate
 
 : game   ( -- )
-    scene( island ) load-scene
-    a( boksil ) subject >!
+    playfield switchto
+    \ a( boksil ) subject >!
     mode>
         <escape> pressed if bye then
 ;
 
 create title-options 0 , 0 , 0 , 0 ,
 : title  ( -- )
-    scene( title ) load-scene
+    scene( title ) aux load
     title-options to scene-options
     mode>
         <enter> pressed if game then
@@ -47,7 +47,7 @@ create title-options 0 , 0 , 0 , 0 ,
 : new-game  ( don't call this in WARM! )
     100 health !
     50 hunger !
-    \ load world 0
+    scene( island ) playfield load
 ;
 
 :make warm

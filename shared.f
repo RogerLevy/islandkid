@@ -11,9 +11,10 @@ globals
     cell global health
 drop
 
-16 bank tilemap0  \ 16
-32 bank world0    \ 16
+16 bank tilemap0   \ 16
+32 bank world0     \ 16
 48 bank ui-tilemap
+49 bank aux        \ slew for title screen and menus etc
 
 
 : tilemap  /bank * tilemap0 + ;
@@ -97,9 +98,9 @@ create coldata
 
 ?action start ( -- )
 
-: load-scene  ( scene -- )  \ loads given scene into the playfield and switches to it
+: load  ( scene slew -- )  \ loads given scene into the playfield and switches to it
     quit
-    playfield switchto
+    switchto
     dup >slew @ ?dup if block then stage copy-bank
     stage copy  \ overwrite the stage's header
     stage cull-outskirts
