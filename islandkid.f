@@ -3,8 +3,6 @@ empty
 s" islandkid.blk" include prg/gamester/gamester.f
 get-order get-current
 
-
-include prg/islandkid/lib/ui.f
 displaywh 3 3 2/ resolution
 
 : draw-status
@@ -18,21 +16,37 @@ default-scene-options 3 :overlay
 ;
 
 
-dialog: mydialog
-    textline: Hi this is a test
-    textline: of the emergency barkcast system.
-    textline: (kill me)
+dialog: tutorial1
+            \ --------------------------------
+    textline: Hey, welcome to Boksil demo.
+    textline: This game saves automatically.
+    textline: To reset the game, hit <ctrl-r>.
 
+    textline: Find food and stay alive.
+    textline: <z> = eat
+    textline: To reset, hit <ctrl-r>.
+;dialog
+
+
+: new-game  ( don't call this in WARM! )
+    100 health !
+    50 hunger !
+    scene( island ) playfield load
+    tutorial1-read off
+;
 
 ( --== Modes ==-- )
 
 : mode>  postpone step> ; immediate
 
 : game   ( -- )
+    quit
     playfield switchto
     \ a( boksil ) subject >!
+    tutorial1-read @ not if  tutorial1  tutorial1-read on  then
     mode>
         <escape> pressed if bye then
+        <r> pressed ctrl? and if new-game then
 ;
 
 create title-options 0 , 0 , 0 , 0 ,
@@ -42,12 +56,6 @@ create title-options 0 , 0 , 0 , 0 ,
     mode>
         <enter> pressed if game then
         <escape> pressed if bye then
-;
-
-: new-game  ( don't call this in WARM! )
-    100 health !
-    50 hunger !
-    scene( island ) playfield load
 ;
 
 :make warm

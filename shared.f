@@ -3,12 +3,14 @@
 depend prg/gamester/lib/collisions.f
 depend ramen/lib/std/rangetools.f
 depend ramen/lib/std/kb.f
+include prg/islandkid/lib/ui.f
 
 globals
     cell global camera
     cell global subject
     cell global hunger
     cell global health
+    cell global tutorial1-read
 drop
 
 16 bank tilemap0   \ 16
@@ -98,11 +100,10 @@ create coldata
 
 ?action start ( -- )
 
-: load  ( scene slew -- )  \ loads given scene into the playfield and switches to it
-    quit
+: load  ( scene slew -- )  \ switches to given slew and loads the given scene into it
     switchto
     dup >slew @ ?dup if block then stage copy-bank
-    stage copy  \ overwrite the stage's header
+    stage copy                    \ overwrite the stage's header with the scene's.
     stage cull-outskirts
     ['] start stage announce
 ;

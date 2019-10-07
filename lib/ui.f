@@ -2,6 +2,7 @@
 \ [ ] - automatically setup tileset and layer etc
 
 common
+s" prg/islandkid/data/zelda.ttf" 8 ALLEGRO_TTF_NO_KERNING font: nes
 
 define uiing
 
@@ -34,19 +35,27 @@ define uiing
     loop drop
 ;
 
+: ?proceed
+    #32 3 * +to &text
+    &text @ 0 = if 
+        paused off  hide-dialog
+    then
+;
+
 common also uiing
+
 
 : draw-ui-text
     ui @ -exit  dialog? -exit
     &text -exit
-    default-font font>
+    nes font>
     32 168 at   &text 3 lines
     
     now 16 and if 
         288 208 at   s" Z" text
     then
     
-    <z> pressed if  paused off  hide-dialog  then
+    <z> pressed if  ?proceed then
 ;
 
 : dialog  ( adr -- )  \ adr = 5 rows x 32 chars
@@ -60,3 +69,5 @@ common also uiing
 
 : dialog:  ( -- <name> ) ( -- )
     create  does> dialog ;
+    
+: ;dialog  0 , ;
