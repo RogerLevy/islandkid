@@ -30,7 +30,7 @@ dialog: tutorial1
 
 : new-game  ( don't call this in WARM! )
     100 health !
-    50 hunger !
+    0 hunger !
     scene( island ) playfield load
     tutorial1-read off
 ;
