@@ -22,7 +22,28 @@ dialog: mydialog
     textline: Hi this is a test
     textline: of the emergency barkcast system.
     textline: (kill me)
-    
+
+
+( --== Modes ==-- )
+
+: mode>  step> ;
+
+: game   ( -- )
+    scene( island ) load-scene
+    a( boksil ) subject >!
+    mode>
+        <escape> pressed if bye then
+;
+
+create title-options 0 , 0 , 0 , 0 ,
+: title  ( -- )
+    scene( title ) load-scene
+    title-options to scene-options
+    mode>
+        <enter> pressed if game then
+        <escape> pressed if bye then
+;
+
 : new-game  ( don't call this in WARM! )
     100 health !
     50 hunger !
@@ -30,10 +51,10 @@ dialog: mydialog
 ;
 
 :make warm
-    \ playfield switchto
-    0 world switchto
-    hide-dialog
+    title
 ;
+
+
 
 ( --== Testing ==-- )
 

@@ -1,7 +1,8 @@
 ( --== application-specific common stuff ==-- )
 
-include prg/gamester/lib/collisions.f
-
+depend prg/gamester/lib/collisions.f
+depend ramen/lib/std/rangetools.f
+depend ramen/lib/std/kb.f
 
 globals
     cell global camera
@@ -88,6 +89,23 @@ create coldata
     r@ >in ! save-template
     r> drop
 ;
+
+: cull-outskirts  ( scene -- )
+    | s | s each> {
+        x 2@ s main-bounds 4@ aabb within? not if  me delete  then
+    } ;
+
+?action start ( -- )
+
+: load-scene  ( scene -- )  \ loads given scene into the playfield and switches to it
+    quit
+    playfield switchto
+    dup >slew @ ?dup if block then stage copy-bank
+    stage copy  \ overwrite the stage's header
+    stage cull-outskirts
+    ['] start stage announce
+;
+
 
 
 ( --== Health/hunger stuff ==-- )
