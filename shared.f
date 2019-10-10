@@ -18,7 +18,6 @@ drop
 48 bank ui-tilemap
 49 bank aux        \ slew for title screen and menus etc
 
-
 : tilemap  /bank * tilemap0 + ;
 : world    /bank * world0 + ;
 
@@ -93,20 +92,26 @@ create coldata
     r> drop
 ;
 
-: cull-outskirts  ( scene -- )
+: cull-outliers  ( scene -- )
     | s | s each> {
         x 2@ s main-bounds 4@ aabb within? not if  me delete  then
     } ;
 
 ?action start ( -- )
 
+: jumpcut  ( scene slew -- )
+    switchto
+    stage copy                    \ overwrite the stage's header with the scene's.    
+;
+
 : load  ( scene slew -- )  \ switches to given slew and loads the given scene into it
     switchto
     dup >slew @ ?dup if block then stage copy-bank
     stage copy                    \ overwrite the stage's header with the scene's.
-    stage cull-outskirts
+    stage cull-outliers
     ['] start stage announce
-;
+; 
+
 
 
 

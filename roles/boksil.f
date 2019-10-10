@@ -15,9 +15,7 @@ drop
 
 : update-status
     -0.001 +hunger
-    hunger @ 0 <= if
-        -0.0005 +health
-    then
+    hunger @ 0 <= if  #-1 +health  then
 ;
 
 

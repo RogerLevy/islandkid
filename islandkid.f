@@ -1,7 +1,7 @@
 include ramen/ramen.f
 empty
 s" islandkid.blk" include prg/gamester/gamester.f
-get-order get-current
+get-order get-current common
 
 displaywh 3 3 2/ resolution
 
@@ -61,14 +61,6 @@ create title-options 0 , 0 , 0 , 0 ,
 :make warm
     title
 ;
-
-
-
-( --== Testing ==-- )
-
-\ mydialog
-
-show-ui
 
 
 \ Don't move this!  Should go at the bottom.
