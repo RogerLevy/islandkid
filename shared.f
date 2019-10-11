@@ -11,6 +11,7 @@ globals
     cell global hunger
     cell global health
     cell global tutorial1-read
+    cell global time
 drop
 
 16 bank tilemap0   \ 16

@@ -13,9 +13,11 @@ drop
     anim# !  1 32 / rate !
 ;
 
+: health--  now 1 and if  #-1 +health  then ;
+
 : update-status
     -0.001 +hunger
-    hunger @ 0 <= if  #-1 +health  then
+    hunger @ 0 <= if  health--  then
 ;
 
 
