@@ -91,24 +91,23 @@ dialog: tutorial1
 
 ( --== Modes ==-- )
 
-: mode>  postpone step> ; immediate
 
-: game   ( -- )
+mode: game   ( -- )
     quit
     playfield switchto
     \ a( boksil ) subject >!
     tutorial1-read @ not if  tutorial1  tutorial1-read on  then
-    mode>
+    step>
         <escape> pressed if bye then
         <r> pressed ctrl? and if new-game then
         time @ #2 + 24 mod time !
 ;
 
 create title-options 0 , 0 , 0 , 0 ,
-: title  ( -- )
+mode: title  ( -- )
     scene( title ) aux load
     title-options to scene-options
-    mode>
+    step>
         <enter> pressed if game then
         <escape> pressed if bye then
 ;
@@ -120,3 +119,4 @@ create title-options 0 , 0 , 0 , 0 ,
 
 \ Don't move this!  Should go at the bottom.
 set-current set-order
+resume-mode

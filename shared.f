@@ -12,6 +12,7 @@ globals
     cell global health
     cell global tutorial1-read
     cell global time
+    #16 global mode
 drop
 
 16 bank tilemap0   \ 16
@@ -45,7 +46,6 @@ create coldata
     then
     w switchto
 ;
-
 
 : save-template  ( -- <name> )
     >in @ template (?$) ?dup 0 = if
@@ -113,6 +113,18 @@ create coldata
     ['] start stage announce
 ; 
 
+: create-mode   create does> dup body> >name ccount mode cplace  @ execute ;
+
+: mode:  ( -- <name> <code> ; )
+    get-order get-current common 
+    create-mode here 0 , :noname swap !
+    set-current set-order
+;
+
+: resume-mode
+    mode c@ -exit
+    mode find if execute else drop then
+;
 
 
 
