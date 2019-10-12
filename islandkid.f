@@ -44,10 +44,11 @@ $10 $30 $c0 createcolor nightblue
 create mycolor 1e sf, 1e sf, 1e sf, 1e sf, 
 
 : amt
-    time @ 5 21 inrange not if 0 ;then
+    night? if 0 ;then
     time @ 5 7 inrange if time @ 5 - 2 / ;then
     time @ 19 21 inrange if time @ 19 - 2 swap - 2 / ;then
-    1 ;
+    1 
+;
     
 
 : draw-night-filter
@@ -81,10 +82,13 @@ dialog: tutorial1
 
 
 
-: new-game  ( don't call this in WARM! )
+: new-game
     100 health !
     2 hunger !
-    scene( test ) playfield load
+    17 time !
+    0 tilemap tilebox /bank move
+    scene( island ) playfield load
+    tilebox playfield layer2 >tilemap >!
     tutorial1-read off
     
 ;
@@ -99,7 +103,7 @@ mode: game   ( -- )
     tutorial1-read @ not if  tutorial1  tutorial1-read on  then
     step>
         <escape> pressed if bye then
-        <r> pressed ctrl? and if new-game then
+\        <r> pressed ctrl? and if new-game then
         time @ #2 + 24 mod time !
 ;
 

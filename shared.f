@@ -19,6 +19,7 @@ drop
 32 bank world0     \ 16
 48 bank ui-tilemap
 49 bank aux        \ slew for title screen and menus etc
+50 bank tilebox    \ destructible tilemap
 
 : tilemap  /bank * tilemap0 + ;
 : world    /bank * world0 + ;
@@ -30,6 +31,8 @@ drop
 create coldata
 0 c, 0 c, #-1 c, #-1 c, #-1 c, #-1 c, 0 c, #-1 c,
 0 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, 
+#-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c,
+#-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c,
 
 : map  stage layer2 >tilemap @> ;
 : standard-physics  map coldata collide-tilemap ;
@@ -102,7 +105,11 @@ create coldata
 
 : jumpcut  ( scene slew -- )
     switchto
-    stage copy                    \ overwrite the stage's header with the scene's.    
+    stage copy                    \ overwrite the stage's header with the scene's.
+    
+    \ TODO: disable actors outside the scene. (WOKE OFF)
+    \ TODO: teleport Boksil...
+    
 ;
 
 : load  ( scene slew -- )  \ switches to given slew and loads the given scene into it
@@ -122,10 +129,15 @@ create coldata
 ;
 
 : resume-mode
+    tool @ ?exit
     mode c@ -exit
     mode find if execute else drop then
 ;
 
+
+
+: day?  time @ 5 21 inrange ;
+: night?    day? not ;
 
 
 ( --== Health/hunger stuff ==-- )

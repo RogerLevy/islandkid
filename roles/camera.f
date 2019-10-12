@@ -8,6 +8,7 @@ define-role camera cameraing
 ;
 
 state: camera state1
+    9999 zorder !
     subject @ if 
         subject @> { x 2@ viewwh 2 2 2/ 2- 8 8 2+ }  x 2! 
     then

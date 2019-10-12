@@ -3,7 +3,8 @@
 <project id="aa00ae15-21a3-4b9f-8220-b0cb8fd4aeff" kpf_version="5" name="Boksil.komodoproject">
 <preference-set idref="aa00ae15-21a3-4b9f-8220-b0cb8fd4aeff" id="project" preftype="project">
   <string id="import_dirname">C:\Users\roger\Documents\Dev\Ramen\RamenEngine-2.0</string>
-  <string id="import_exclude_matches">*.*~;*.bak;*.tmp;CVS;.#*;*.pyo;*.pyc;.svn;_svn;.git;.hg;.bzr;*%25*;tmp*.html;.DS_Store;*.swp;*.kpf;*.komodoproject;.komodotools;__pycache__;*.fs;*.api;bin;*.blk;ffl-ramen;objmaker;seqfile;tmx-ramen;ex;sample</string>
+  <string id="import_exclude_matches">*.*~;*.bak;*.tmp;CVS;.#*;*.pyo;*.pyc;.svn;_svn;.git;.hg;.bzr;*%25*;tmp*.html;.DS_Store;*.swp;*.kpf;*.komodoproject;.komodotools;__pycache__;*.fs;*.api;bin;*.blk;ffl-ramen;objmaker;seqfile;tmx-ramen;ex;sample;adventure</string>
+  <string id="import_include_matches"></string>
   <string id="last_local_directory">C:\Users\roger\Documents\Dev\Ramen\RamenEngine-2.0</string>
   <string id="last_remote_directory">None</string>
   <long id="prefs_version">1</long>

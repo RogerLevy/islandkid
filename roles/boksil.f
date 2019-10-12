@@ -17,6 +17,7 @@ drop
 
 : update-status
     -0.001 +hunger
+    \ night? if  health-  then
     hunger @ 0 <= if  health--  then
 ;
 
@@ -30,16 +31,20 @@ dialog: easter-egg
 ;dialog
 
 
+: rem  ( adr - ) 1 swap ! ;
+
 : interact-tile ( adr - )
     20 interact-cooldown !
-    @ case
-        9 = if easter-egg ;then
+    a!>
+    @a case
+        9 of easter-egg exit endof
+        17 of a@ hunger @ 90 < if rem 50 +hunger then exit endof
     endcase
     0 interact-cooldown !
 ;
 
 : ?map-interact ( relx rely - )
-    x 2@ 2+ 16 16 2/ map adr interact-tile ;
+    x 2@ 2+ 16 16 2/ map tile interact-tile ;
 
 state: boksil state1
     update-status
