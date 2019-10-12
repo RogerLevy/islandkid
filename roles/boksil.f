@@ -46,7 +46,7 @@ dialog: easter-egg
 : ?map-interact ( relx rely - )
     x 2@ 2+ 16 16 2/ map tile interact-tile ;
 
-state: boksil state1
+state: state1 boksil
     update-status
     1 walkctr +!
     vx 2@ or if
@@ -72,6 +72,6 @@ state: boksil state1
     then
 ;
 
-action: boksil physics  standard-physics ;
-action: boksil start  0 ?animate  state1  me subject >! ;
-action: boksil hit  ." HIT!" ;
+action: physics boksil  standard-physics ;
+action: start   boksil  0 ?animate  state1  me subject >! ;
+action: hit     boksil  ." HIT!" ;

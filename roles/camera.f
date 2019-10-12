@@ -7,7 +7,7 @@ define-role camera cameraing
     x 2@ stage scroll 2!
 ;
 
-state: camera state1
+state: state1 camera 
     9999 zorder !
     subject @ if 
         subject @> { x 2@ viewwh 2 2 2/ 2- 8 8 2+ }  x 2! 
@@ -15,5 +15,5 @@ state: camera state1
     !scroll
 ;
 
-action: camera stop   woke off ;
-action: camera start  state1 ;
+action: stop  camera  woke off ;
+action: start camera  state1 ;

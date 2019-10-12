@@ -2,8 +2,8 @@ depend ramen/lib/std/kb.f
 
 define-role event eventing
 
-state: event state1
+state: state1 event
     [dev] [if] hid on [then]
 ;
 
-action: event start  state1 ;
+action: start event  state1 ;
