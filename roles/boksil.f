@@ -73,5 +73,5 @@ state: state1 boksil
 ;
 
 action: physics boksil  standard-physics ;
-action: start   boksil  0 ?animate  state1  me subject >! ;
+action: start   boksil  0 ?animate  state1  me subject >!  me player1 >! ;
 action: hit     boksil  ." HIT!" ;

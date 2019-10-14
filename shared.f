@@ -13,6 +13,9 @@ globals
     cell global tutorial1-read
     cell global time
     #16 global mode
+    cell global player1
+    cell global warp-src
+    cell global warp-dest
 drop
 
 16 bank tilemap0   \ 16
@@ -24,15 +27,16 @@ drop
 : tilemap  /bank * tilemap0 + ;
 : world    /bank * world0 + ;
 
+: reset-map    0 tilemap tilebox /bank move ;
 
 \ : coldata@  cells >pic @> >coldata + @ block ;
 \ : coldata  1 coldata@ ;
 
 create coldata
 0 c, 0 c, #-1 c, #-1 c, #-1 c, #-1 c, 0 c, #-1 c,
-0 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, 
+0 c, #-1 c, #-1 c, #-1 c, #-1 c, 0 c, #-1 c, #-1 c, 
 #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c,
-#-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c, #-1 c,
+#-1 c, #-1 c, #-1 c, #-1 c, #-1 c, 0 c, #-1 c, #-1 c,
 
 : map  stage layer2 >tilemap @> ;
 : standard-physics  map coldata collide-tilemap ;
@@ -96,29 +100,41 @@ create coldata
     r> drop
 ;
 
-: cull-outliers  ( scene -- )
-    | s | s each> {
-        x 2@ s main-bounds 4@ aabb within? not if  me delete  then
-    } ;
+: outlier?  x 2@ stage main-bounds 4@ aabb within? not ;
+
+: cull-outliers  ( -- )
+    stage each> { outlier? if  me delete  then } ;
 
 ?action start ( -- )
 
-: jumpcut  ( scene slew -- )
-    switchto
+: jumpcut  ( scene -- )
     stage copy                    \ overwrite the stage's header with the scene's.
-    
-    \ TODO: disable actors outside the scene. (WOKE OFF)
-    \ TODO: teleport Boksil...
-    
+    stage each>
+        { outlier? important @ not and disabled ! }
 ;
 
-: load  ( scene slew -- )  \ switches to given slew and loads the given scene into it
+: warp  ( scene -- )
+    jumpcut
+    
+    \ if player is overlapping an event object with a warp destination ref, use that to reposition the player
+    player1 ?@> ?dup if {
+        warp-dest ?@> ?dup if
+            { x 2@ } x 2!  \ TODO: add position relative to warp-src
+            warp-dest off
+        then
+    } then
+;
+
+: load-scene  ( scene slew -- )  \ switches to given slew and loads the given scene into it
     switchto
     dup >slew @ ?dup if block then stage copy-bank
     stage copy                    \ overwrite the stage's header with the scene's.
-    stage cull-outliers
-    ['] start stage announce
-; 
+    cull-outliers
+;
+
+: init  ['] start stage announce ;
+
+: load  scene ($) playfield load-scene  init ;  \ CLI
 
 : create-mode   create does> dup body> >name ccount mode cplace  @ execute ;
 

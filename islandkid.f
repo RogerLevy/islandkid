@@ -81,18 +81,6 @@ dialog: tutorial1
 ;dialog
 
 
-
-: new-game
-    100 health !
-    2 hunger !
-    17 time !
-    0 tilemap tilebox /bank move
-    scene( island ) playfield load
-    tilebox playfield layer2 >tilemap >!
-    tutorial1-read off
-    
-;
-
 ( --== Modes ==-- )
 
 
@@ -109,11 +97,23 @@ mode: game   ( -- )
 
 create title-options 0 , 0 , 0 , 0 ,
 mode: title  ( -- )
-    scene( title ) aux load
+    scene( title ) aux load-scene
     title-options to scene-options
     step>
         <enter> pressed if game then
         <escape> pressed if bye then
+;
+
+: new-game
+    100 health !
+    2 hunger !
+    17 time !
+    reset-map
+    scene( island ) playfield load-scene
+    scene( test ) warp
+    tilebox playfield layer2 >tilemap >!
+    tutorial1-read off
+    init game
 ;
 
 :make warm

@@ -16,4 +16,5 @@ state: state1 camera
 ;
 
 action: stop  camera  woke off ;
-action: start camera  state1 ;
+action: start camera  state1   hid on ;
+    
