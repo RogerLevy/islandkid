@@ -5,18 +5,15 @@ depend ramen/lib/std/rangetools.f
 depend ramen/lib/std/kb.f
 include prg/islandkid/lib/ui.f
 
-globals
-    cell global camera
-    cell global subject
-    cell global hunger
-    cell global health
-    cell global tutorial1-read
-    cell global time
-    #16 global mode
-    cell global player1
-    cell global warp-src
-    cell global warp-dest
-2drop
+cell global camera
+cell global subject
+cell global hunger
+cell global health
+cell global tutorial1-read
+cell global time
+cell global player1
+cell global warp-src
+cell global warp-dest
 
 16 bank tilemap0   \ 16
 32 bank world0     \ 16
@@ -138,30 +135,6 @@ create coldata
 
 : day?  time @ 5 21 inrange ;
 : night?    day? not ;
-
-
-( --== Modes ==-- )
-
-: create-mode   create does> dup body> >name ccount mode cplace  @ execute ;
-
-: mode:  ( -- <name> <code> ; )
-    get-order get-current common 
-    create-mode here 0 , :noname swap !
-    set-current set-order
-;
-
-: temp-development
-   tool @ if
-        lasttool @ 0<> tool @ 0<> and if
-            resume
-        else
-            quit tool @ lasttool !
-        then
-   else
-        quit  mode find if execute then
-   then
-;
-
 
 ( --== Health/hunger stuff ==-- )
 

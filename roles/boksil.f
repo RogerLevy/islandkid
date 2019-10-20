@@ -46,19 +46,7 @@ dialog: easter-egg
 : ?map-interact ( relx rely - )
     x 2@ 2+ 16 16 2/ map tile interact-tile ;
 
-state: state1 boksil
-    update-status
-    1 walkctr +!
-    vx 2@ or if
-        walkctr @ 8 < ?exit
-    then
-    
-    0 0 vx 2!
-    <down> kstate if   1 vy !  0 walkctr !  0 ?animate ;then
-    <up> kstate if    -1 vy !  0 walkctr !  1 ?animate ;then
-    <right> kstate if  1 vx !  0 walkctr !  2 ?animate ;then
-    <left> kstate if  -1 vx !  0 walkctr !  3 ?animate ;then
-    
+: ?interact
     -1 interact-cooldown +!
     interact-cooldown @ 0 < if
         <z> pressed if
@@ -72,6 +60,21 @@ state: state1 boksil
     then
 ;
 
-action: physics boksil  standard-physics ;
+state: state1 boksil
+    update-status
+    1 walkctr +!
+    vx 2@ or if
+        walkctr @ 8 < ?exit
+    then
+    
+    0 0 vx 2!
+    <down> kstate if   1 vy !  0 walkctr !  0 ?animate ;then
+    <up> kstate if    -1 vy !  0 walkctr !  1 ?animate ;then
+    <right> kstate if  1 vx !  0 walkctr !  2 ?animate ;then
+    <left> kstate if  -1 vx !  0 walkctr !  3 ?animate ;then
+    
+;
+
+action: physics boksil  standard-physics  ?interact ;
 action: start   boksil  0 ?animate  state1  me subject >!  me player1 >! ;
 action: hit     boksil  ." HIT!" ;

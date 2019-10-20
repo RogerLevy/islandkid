@@ -1,18 +1,17 @@
 \ TODO
 \ [ ] - automatically setup tileset and layer etc
 
+
 common
 s" prg/islandkid/data/zelda.ttf" 8 ALLEGRO_TTF_NO_KERNING font: nes
 
 define uiing
+common also uiing definitions
 
-
-common also uiing
 variable ui
 0 value dialog?
 \ variable >text  
 0 value &text
-
 : ui-layer stage layer4 ;
 
 
