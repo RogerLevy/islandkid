@@ -5,7 +5,7 @@ volatilevars
     actorvar walkctr
     actorvar dir
     actorvar interact-cooldown
-drop
+2drop
 
 : ?animate  ( n -- )
     dup anim# @ = if drop ;then

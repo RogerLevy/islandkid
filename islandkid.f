@@ -1,7 +1,7 @@
 include ramen/ramen.f
 empty
 s" islandkid.blk" include prg/gamester/gamester.f
-get-order get-current common
+common
 
 displaywh 3 3 2/ resolution
 
@@ -17,12 +17,10 @@ create multiply ALLEGRO_ADD , ALLEGRO_DEST_COLOR , ALLEGRO_ZERO , ALLEGRO_ADD , 
 $10 $30 $c0 createcolor nightblue
 
 : 4f@  ( ALLEGRO_COLOR -- r g b a )
-    a!> f@+ f>p f@+ f>p f@+ f>p f@+ f>p 
-;
+    a!> f@+ f>p f@+ f>p f@+ f>p f@+ f>p ;
 
 : allegro-color! ( r g b a ALLEGRO_COLOR -- )
-    4af 4!
-;
+    4af 4! ;
 
 : allegro-color-lerp  ( src-allegro-color dest-allegro-color n -- )
     | n dest src |
@@ -95,6 +93,7 @@ mode: game   ( -- )
         time @ #2 + 24 mod time !
 ;
 
+
 create title-options 0 , 0 , 0 , 0 ,
 mode: title  ( -- )
     scene( title ) aux load-scene
@@ -122,5 +121,4 @@ mode: title  ( -- )
 
 
 \ Don't move this!  Should go at the bottom.
-set-current set-order
-resume-mode
+temp-development

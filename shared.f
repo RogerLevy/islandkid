@@ -16,7 +16,7 @@ globals
     cell global player1
     cell global warp-src
     cell global warp-dest
-drop
+2drop
 
 16 bank tilemap0   \ 16
 32 bank world0     \ 16
@@ -136,6 +136,12 @@ create coldata
 
 : load  scene ($) playfield load-scene  init ;  \ CLI
 
+: day?  time @ 5 21 inrange ;
+: night?    day? not ;
+
+
+( --== Modes ==-- )
+
 : create-mode   create does> dup body> >name ccount mode cplace  @ execute ;
 
 : mode:  ( -- <name> <code> ; )
@@ -144,16 +150,17 @@ create coldata
     set-current set-order
 ;
 
-: resume-mode
-    tool @ ?exit
-    mode c@ -exit
-    mode find if execute else drop then
+: temp-development
+   tool @ if
+        lasttool @ 0<> tool @ 0<> and if
+            resume
+        else
+            quit tool @ lasttool !
+        then
+   else
+        quit  mode find if execute then
+   then
 ;
-
-
-
-: day?  time @ 5 21 inrange ;
-: night?    day? not ;
 
 
 ( --== Health/hunger stuff ==-- )
